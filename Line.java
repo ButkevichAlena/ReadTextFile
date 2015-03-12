@@ -7,11 +7,11 @@ public class Line {
 	public int numberOfAnswer;
 	public int bytes;
 	
-	Line (String _ip, String _timeAndData, String _way, int _numberOfAnswer, int _bytes){
-		ip = _ip;
-		timeAndData = _timeAndData;
-		way = _way;
-		numberOfAnswer = _numberOfAnswer;
-		bytes = _bytes;
+	Line (){
+		
 		}
+	@Override
+    public String toString() {
+        return ip + timeAndData + way + Integer.toString(numberOfAnswer) + Integer.toString(bytes);
+    }
 }

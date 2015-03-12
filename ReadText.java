@@ -5,47 +5,51 @@ import java.util.*;
 
 public class ReadText {
 public static void main(String[] args) throws IOException{
-    File file = new File(args[0]);
     
-    BufferedReader f1 = new BufferedReader(new FileReader(file));
-    int count = 0;
-    while (f1.readLine() != null) count ++;
-    String[] lines = new String[count];
-    System.out.println(count);
-    f1.close();
+	ArrayList<String> text = new ArrayList<String>();
+	
+    Reader reader = new Reader();
+    text = reader.Read(args[0], args[1], args[2]);
     
-    BufferedReader f2 = new BufferedReader(new FileReader(file));
-    for (int i = 0; i < count; i++ )lines[i] = f2.readLine();
-    ArrayList<String> text = new ArrayList<String>();
-    if (Integer.parseInt(args[1]) > count) System.out.println("Invalid input"); else {
-    	if (Integer.parseInt(args[2]) > count) for (int i = Integer.parseInt(args[1]); i <= count ; i++ ){System.out.println(lines[i]);text.add(lines[i]);} else {
-    		for (int i = Integer.parseInt(args[1]); i < Integer.parseInt(args[2]) ; i++ ){System.out.println(lines[i]); text.add(lines[i]);}		
-    	}
+    ArrayList<Line> list = new ArrayList<Line>();
+    
+    for(String line: text){
+    list.add(toSplitLine(line));
     }
-    f2.close();
+      
+    Writer writer = new Writer();
     
-    String[] Split = null;
-    String[] Split1 = null;
-    String[] Split2 = null; 
-    String[] Split3 = null; 
-    
-    for(String line : text)
-    {
-    	Split = line.split(" - - "); 
-    	Split1 = Split[1].split(" \""); 
-    	Split2 = Split1[1].split("\""); 
-    	Split3 = Split2[1].split(" "); 
-    	
-    	Line l = new Line(Split[0], Split1[0], Split2[0], Integer.valueOf(Split3[1]), Integer.valueOf( Split3[2]));
-
-    	System.out.println (l.ip+ " " + l.timeAndData + "\"" + l.way + "\""+" "+ l.numberOfAnswer +" "+ l.bytes);
-    }
-       
-    file = new File(args[3]);
-    PrintWriter out = new PrintWriter(new BufferedWriter(
-    		  new FileWriter(file)));
-
-    for(String line : text) {out.print(line + '\n');};
-    		  out.flush();
-	}
+    writer.Write(args[3], list);
 }
+
+    public static Line getLine (String _ip, String _timeAndData, String _way, int _numberOfAnswer, int _bytes)
+    {
+      Line line = new Line();
+      line.ip = _ip;
+		line.timeAndData = _timeAndData;
+		line.way = _way;
+		line.numberOfAnswer = _numberOfAnswer;
+		line.bytes = _bytes;
+      return line;
+    }
+    
+    public static Line toSplitLine(String line){
+    String[] split1 = null;
+    String[] split2 = null;
+    String[] split3 = null; 
+    String[] split4 = null; 
+    
+
+    split1 = line.split(" - - "); 
+    split2 = split1[1].split(" \""); 
+    split3 = split2[1].split("\""); 
+    split4 = split3[1].split(" "); 
+    	
+    	
+    Line l = getLine(split1[0], split2[0], split3[0], Integer.parseInt(split4[1]), Integer.parseInt(split4[2]) );
+     
+    return l;
+    	}
+    	
+    }
+
