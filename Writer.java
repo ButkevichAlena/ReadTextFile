@@ -17,7 +17,7 @@ public class Writer {
     		  new FileWriter(file)));
 		
 		for(Line line: list)
-		out.print(line.toString() + '\n');
+		out.print(line.getString() + '\n');
     		  out.flush();
 	}
     catch (Exception e) { 

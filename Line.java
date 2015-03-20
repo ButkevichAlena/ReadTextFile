@@ -1,17 +1,39 @@
 package DefaultPackage;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Locale;
+
+
 
 public class Line {
-	public String ip ;
-	public String timeAndData;
+	
+	public ArrayList<String> host = new ArrayList<String>() ;
+	public ArrayList<Integer> ip = new ArrayList<Integer>(); 
+	public Date timeAndData;
 	public String way;
 	public int numberOfAnswer;
 	public int bytes;
 	
-	Line (){
-		
-		}
-	@Override
-    public String toString() {
-        return ip + timeAndData + way + Integer.toString(numberOfAnswer) + Integer.toString(bytes);
-    }
+	public String getString(){
+	SimpleDateFormat dateFormat = new SimpleDateFormat("[dd/MMM/yyyy:HH:mm:ss Z]", Locale.ENGLISH);
+	StringBuilder string = new StringBuilder();
+	  
+	  if(ip.size() != 0){
+		  for(Integer i: ip){
+			  string.append(i.toString() + ".");        	 
+		  }
+	  }
+	  else{
+		  for(String i: host){
+			  string.append(i + ".");
+		  }
+	  }
+	  
+	  string.deleteCharAt(string.length() - 1);
+	  
+	  string.append(" - - " + dateFormat.format(timeAndData) + " \"" + way + "\" " + numberOfAnswer + " " + bytes);
+	  
+	  return string.toString();
+	  }
 }
