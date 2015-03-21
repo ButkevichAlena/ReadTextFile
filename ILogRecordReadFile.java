@@ -1,5 +1,7 @@
 package DefaultPackage;
 
-public interface ILogRecordReadFile<T> {
-	T read (String fileName, String firstLine, String secondLine);
+import java.text.ParseException;
+
+public interface ILogRecordReadFile {
+	void read(String fileName, String firstLine, String secondLine, String fileToWriteName) throws ParseException;
 }
