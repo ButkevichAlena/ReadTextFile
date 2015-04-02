@@ -2,6 +2,6 @@ package DefaultPackage;
 
 import java.util.ArrayList;
 
-public interface ILogRecordWriteFile {
+public interface ILogRecordFileWriter {
 	void write (String fileName, ArrayList<Line> list);
 }

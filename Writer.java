@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-public class Writer implements ILogRecordWriteFile {
+public class Writer implements ILogRecordFileWriter {
     @Override 
     public void write(String fileName, ArrayList<Line> list){
 		try{
