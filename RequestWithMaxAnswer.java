@@ -3,10 +3,10 @@ package DefaultPackage;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class RequestWithMaxAnswer implements IRequestWithMaxAnswer<ReportForRequestWithMaxAnswer> {
+public class RequestWithMaxAnswer implements IReportMaker<ReportForRequestWithMaxAnswer> {
 
 	@Override
-	public ReportForRequestWithMaxAnswer getReqest(ArrayList<Line> list, Date firstDate, Date secondDate){
+	public ReportForRequestWithMaxAnswer makeReport(ArrayList<Line> list, Date firstDate, Date secondDate){
 		int max = 0;
 		
 		for(Line line: list)

@@ -44,7 +44,7 @@ public class FileAnalyzer{
 				 MostActiveHosts mostActiveHosts = new MostActiveHosts();
 				 ReportForMostActiveHosts report = new ReportForMostActiveHosts();
 				 
-				 report = mostActiveHosts.mostActive(reader.list, firstDate, secondDate);
+				 report = mostActiveHosts.makeReport(reader.list, firstDate, secondDate);
 				 System.out.println(report.toString());
 			 } 
 			
@@ -54,7 +54,7 @@ public class FileAnalyzer{
 				 SummarySizeOfAnswers request = new SummarySizeOfAnswers();
 				 ReportForSummarySizeOfAnswers report = new  ReportForSummarySizeOfAnswers();
 				 
-				 report = request.getSize(reader.list, firstDate, secondDate);
+				 report = request.makeReport(reader.list, firstDate, secondDate);
 				 
 				 System.out.println ("Summary size of answers is " + report.toString() + " bytes." );
 			}
@@ -65,7 +65,7 @@ public class FileAnalyzer{
 				 RequestWithMaxAnswer request = new RequestWithMaxAnswer();
 				 ReportForRequestWithMaxAnswer report = new ReportForRequestWithMaxAnswer();
 				 
-				 report = request.getReqest(reader.list, firstDate, secondDate);
+				 report = request.makeReport(reader.list, firstDate, secondDate);
 				 
 				 System.out.println ("Size of biggset answer is " + report.toString() + " bytes." );
 			}

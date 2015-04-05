@@ -3,10 +3,10 @@ package DefaultPackage;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class SummarySizeOfAnswers implements ISummarySizeOfAnswers< ReportForSummarySizeOfAnswers> {
+public class SummarySizeOfAnswers implements IReportMaker<ReportForSummarySizeOfAnswers> {
 	
 	@Override
-	public  ReportForSummarySizeOfAnswers getSize(ArrayList<Line> list, Date firstDate, Date secondDate) {
+	public  ReportForSummarySizeOfAnswers makeReport(ArrayList<Line> list, Date firstDate, Date secondDate) {
 		int size = 0;
 		
 		for(Line line: list)
