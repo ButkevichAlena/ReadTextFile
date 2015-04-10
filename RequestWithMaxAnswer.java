@@ -1,17 +1,14 @@
 package DefaultPackage;
 
-import java.util.ArrayList;
-import java.util.Date;
-
-public class RequestWithMaxAnswer implements IReportMaker<ReportForRequestWithMaxAnswer> {
+public class RequestWithMaxAnswer implements IReportMaker<ReportForRequestWithMaxAnswer, ParametersOfReport> {
 
 	@Override
-	public ReportForRequestWithMaxAnswer makeReport(ArrayList<Line> list, Date firstDate, Date secondDate){
+	public ReportForRequestWithMaxAnswer makeReport(ParametersOfReport parameters){
 		int max = 0;
 		
-		for(Line line: list)
+		for(Line line: parameters.list)
 		{
-			if(line.timeAndData.after(firstDate) && line.timeAndData.before(secondDate))
+			if(line.timeAndData.after(parameters.firstDate) && line.timeAndData.before(parameters.secondDate))
 			{
 				if(line.bytes > max)
 				{

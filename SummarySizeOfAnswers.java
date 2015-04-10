@@ -1,17 +1,14 @@
 package DefaultPackage;
 
-import java.util.ArrayList;
-import java.util.Date;
-
-public class SummarySizeOfAnswers implements IReportMaker<ReportForSummarySizeOfAnswers> {
+public class SummarySizeOfAnswers implements IReportMaker<ReportForSummarySizeOfAnswers, ParametersOfReport> {
 	
 	@Override
-	public  ReportForSummarySizeOfAnswers makeReport(ArrayList<Line> list, Date firstDate, Date secondDate) {
+	public  ReportForSummarySizeOfAnswers makeReport(ParametersOfReport parameters) {
 		int size = 0;
 		
-		for(Line line: list)
+		for(Line line: parameters.list)
 		{
-			if(line.timeAndData.after(firstDate) && line.timeAndData.before(secondDate))
+			if(line.timeAndData.after(parameters.firstDate) && line.timeAndData.before(parameters.secondDate))
 			{
 				size+=line.bytes;
 			}

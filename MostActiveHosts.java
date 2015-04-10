@@ -3,20 +3,19 @@ package DefaultPackage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MostActiveHosts implements IReportMaker<ReportForMostActiveHosts> {
+public class MostActiveHosts implements IReportMaker<ReportForMostActiveHosts, ParametersOfReport> {
 
 	@Override
-	public ReportForMostActiveHosts makeReport(ArrayList<Line> list, Date firstDate, Date secondDate) {
+	public ReportForMostActiveHosts makeReport(ParametersOfReport parameters) {
 			Map<String,Integer> hosts = new HashMap<String, Integer>();
 			int count = 5;
-			for(Line line: list)
+			for(Line line: parameters.list)
 			{
-				if(line.timeAndData.after(firstDate) && line.timeAndData.before(secondDate))
+				if(line.timeAndData.after(parameters.firstDate) && line.timeAndData.before(parameters.secondDate))
 				{
 					if(hosts.containsKey(line.getAddress()))
 					{

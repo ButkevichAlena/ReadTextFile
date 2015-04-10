@@ -36,7 +36,9 @@ public class FileAnalyzer{
 			System.out.println("Input second date in format (yyyy.MM.dd:HH:mm:ss): ");
 			sdate = scanner.next();
 			Date secondDate = dateFormat.parse(sdate);
-		       
+		    
+			ParametersOfReport parameters = new ParametersOfReport(reader.list, firstDate, secondDate);
+			
 			if(numberOfReport == 1){
 				
 				 System.out.println("\nReport 1:");
@@ -44,7 +46,7 @@ public class FileAnalyzer{
 				 MostActiveHosts mostActiveHosts = new MostActiveHosts();
 				 ReportForMostActiveHosts report = new ReportForMostActiveHosts();
 				 
-				 report = mostActiveHosts.makeReport(reader.list, firstDate, secondDate);
+				 report = mostActiveHosts.makeReport(parameters);
 				 System.out.println(report.toString());
 			 } 
 			
@@ -54,7 +56,7 @@ public class FileAnalyzer{
 				 SummarySizeOfAnswers request = new SummarySizeOfAnswers();
 				 ReportForSummarySizeOfAnswers report = new  ReportForSummarySizeOfAnswers();
 				 
-				 report = request.makeReport(reader.list, firstDate, secondDate);
+				 report = request.makeReport(parameters);
 				 
 				 System.out.println ("Summary size of answers is " + report.toString() + " bytes." );
 			}
@@ -65,7 +67,7 @@ public class FileAnalyzer{
 				 RequestWithMaxAnswer request = new RequestWithMaxAnswer();
 				 ReportForRequestWithMaxAnswer report = new ReportForRequestWithMaxAnswer();
 				 
-				 report = request.makeReport(reader.list, firstDate, secondDate);
+				 report = request.makeReport(parameters);
 				 
 				 System.out.println ("Size of biggset answer is " + report.toString() + " bytes." );
 			}
