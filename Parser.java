@@ -40,7 +40,7 @@ public class Parser implements IRecordLineParser {
 	    	ParseAddress(split1[0]);
 	    
 	    	if(isValidate(split1[0])){
-	    		ArrayList <Integer> ip = new ArrayList();
+	    		ArrayList <Integer> ip = new ArrayList<Integer>();
 	    		for(String s: ParseAddress(split1[0])){
 	    			ip.add(Integer.valueOf(s)); 
 	    		}

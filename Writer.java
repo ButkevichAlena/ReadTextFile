@@ -10,12 +10,12 @@ public class Writer implements ILogRecordFileWriter {
     @Override 
     public void write(String fileName, ArrayList<Line> list){
 		try{
-			File file = new File(fileName);
-			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(file)));
+			BufferedWriter out = new BufferedWriter(new BufferedWriter(new FileWriter(fileName)));
 		
 			for(Line line: list)
-			out.print(line.getString() + '\n');
-    		out.flush(); out.close();
+			out.write(line.getString());
+			out.newLine();
+			out.close();
 		}
 		catch (Exception e) { 
 			System.out.println("ошибка!!! " + e.getMessage()); 

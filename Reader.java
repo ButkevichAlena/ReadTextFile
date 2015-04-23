@@ -2,6 +2,7 @@ package DefaultPackage;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -18,29 +19,56 @@ public class Reader implements ILogRecordReadFile {
 	}
 	
 	@Override
-	public void read(String fileName, int firstLine, int secondLine, String fileToWriteName) throws ParseException
+	public void read(String fileName, int firstLine, int numberOfLines, String fileToWriteName) throws ParseException
 	{
 	 File file = new File(fileName);
 	    
 	 ArrayList<String> text = new ArrayList<String>();
 	 
 	 try {
-	    BufferedReader f1 = new BufferedReader(new FileReader(file));
-	    int count = 0;
-	    while (f1.readLine() != null) count ++;
-	    String[] lines = new String[count];
-	    f1.close();
-	 
-	    BufferedReader f2 = new BufferedReader(new FileReader(file));
-	    for (int i = 0; i < count; i++ )lines[i] = f2.readLine();
-	    
-	    if (firstLine > count) System.out.println("Invalid input"); else {
-	    	if (secondLine > count) for (int i = firstLine; i <= count ; i++ )text.add(lines[i]); else {
-	    		for (int i = firstLine; i < secondLine ; i++ ) text.add(lines[i]);		
-	    	}
-	    }
-	    f2.close();
-	    
+		 FileInputStream inputStream = new FileInputStream(new File(fileName));
+			
+			int i = 0;
+			int j = 0;
+			
+			while(i != firstLine - 1)
+			{
+				int b = inputStream.read();
+				if(b == 10)
+				{
+					i++;
+				}
+				if(b == -1)
+					break;
+			}
+			
+			ArrayList<Character> byteString = new ArrayList<Character>(); 
+			
+			StringBuffer buffer = new StringBuffer();
+			while(j != numberOfLines)
+			{
+				int b = inputStream.read();
+				byteString.add((char)b);
+				
+				if(b == 10)
+				{
+					j++;
+					
+					
+					for(Character ch: byteString)
+					{
+						buffer.append(ch);
+					}
+					
+					text.add(buffer.toString().trim());
+					
+					buffer.delete(0, buffer.length());
+					byteString.clear();
+				}
+				
+				if(b == -1)
+					break;
+			}    
 	 }
 	 catch (Exception e) { 
          System.out.println("ошибка!!! " + e.getMessage()); 
@@ -50,6 +78,8 @@ public class Reader implements ILogRecordReadFile {
 	 	 
 	 for (String line: text){
 			list.add(parser.parse(line));
+			for (Line l: list){
+			}
 	 }
 	  
      writer.write(fileToWriteName, list);
